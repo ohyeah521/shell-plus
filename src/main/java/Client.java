@@ -18,13 +18,19 @@ public class Client {
 
     public static void main(String[] args) throws RemoteException {
         if(args ==null ||args.length < 3){
-            System.out.println(Client.class.getName()+" <port> <ip> <name>");
+            System.out.println(Client.class.getName()+" <port> <ip> <name> [pwd]");
             System.exit(-1);
             return;
         }
         Integer port = Integer.parseInt(args[0]);
         String ip = args[1];
         String name = args[2];
+        String pwd = "";
+        try{
+            pwd = args[3];
+            pwd = pwd.trim();
+        }
+        catch (Exception e){}
         Registry registry = null;
         try {
             registry = LocateRegistry.getRegistry(ip,port);
@@ -52,7 +58,7 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             if(scanner.hasNext()){
                 String cmd = scanner.nextLine();
-                System.out.println(server.execCmd(cmd));
+                System.out.println(server.execCmd(cmd,pwd,System.getProperty("os.name")));
             }
         }
     }

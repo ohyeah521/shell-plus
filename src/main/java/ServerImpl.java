@@ -14,18 +14,27 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class ServerImpl extends UnicastRemoteObject implements Server {
 
-    ServerImpl() throws RemoteException {
+    private static String pwd = null;
+    ServerImpl(String pwd) throws RemoteException {
         super();
+        this.pwd = pwd;
     }
+
+
     /**
      * 执行命令
-     * @param cmd
+     * @param cmd 执行命令
+     * @param clientPwd 连接密码
+     * @param  clientOs 客户端操作系统
      * @return
      * @throws RemoteException
      */
-    public String execCmd(String cmd) throws RemoteException {
+    public String execCmd(String cmd, String clientPwd, String clientOs) throws RemoteException {
         if(cmd == null || "".equals(cmd)){
-            return "执行命令不能为空";
+            return "commond not null";
+        }
+        if(pwd != null && !pwd.equals(clientPwd)){
+            return "Incorrect password";
         }
         cmd = cmd.trim();
         StringBuilder result = new StringBuilder();
@@ -33,6 +42,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         BufferedReader bufrIn = null;
         BufferedReader bufrError = null;
         String os = System.getProperty("os.name");
+        os = os.toLowerCase();
         if(os.contains("win")){
             if(cmd.contains("ping") && !cmd.contains("-n")){
                 cmd += " -n 4";
@@ -45,8 +55,18 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         try {
             process = Runtime.getRuntime().exec(cmd);
             process.waitFor();
-            bufrIn = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
-            bufrError = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
+            if(clientOs != null){
+                clientOs = clientOs.toLowerCase();
+            }else{
+                clientOs = "";
+            }
+            if(clientOs.contains("win")){
+                bufrIn = new BufferedReader(new InputStreamReader(process.getInputStream(), "GBK"));
+                bufrError = new BufferedReader(new InputStreamReader(process.getErrorStream(), "GBK"));
+            }else{
+                bufrIn = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+                bufrError = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
+            }
             // 读取输出
             String line = null;
             while ((line = bufrIn.readLine()) != null) {
@@ -56,11 +76,13 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
                 result.append(line).append('\n');
             }
         } catch (InterruptedException e) {
-            return cmd+" 执行错误，错误信息："+e.getMessage();
+            String msg = strConver(e.getMessage(),clientOs);
+            return cmd+" execute error,msg："+msg;
         } catch (UnsupportedEncodingException e) {
-            return cmd+" 执行错误，错误信息："+e.getMessage();
+            String msg = strConver(e.getMessage(),clientOs);
+            return cmd+" execute error,msg："+msg;
         } catch (IOException e) {
-            return cmd+" 执行错误，错误信息："+e.getMessage();
+            return cmd+" execute error,msg: not found commond";
         } finally {
             closeStream(bufrIn);
             closeStream(bufrError);
@@ -69,7 +91,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
             }
         }
         if(result == null || "".equals(result)){
-            return cmd+" 执行完毕！";
+            return cmd+" execute ok！";
         }else{
             return result.toString();
         }
@@ -82,5 +104,23 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
             } catch (Exception e) {
             }
         }
+    }
+
+    static String strConver(String str, String os){
+        String msg = "";
+        if(os.contains("win")){
+            try {
+                msg = new String(str.getBytes(),"GBK");
+            } catch (UnsupportedEncodingException ex) {
+                msg = str;
+            }
+        }else{
+            try {
+                msg = new String(str.getBytes(),"UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                msg = str;
+            }
+        }
+        return msg;
     }
 }

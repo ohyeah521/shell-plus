@@ -15,9 +15,11 @@ public interface Server extends Remote {
 
     /**
      * 执行命令
-     * @param cmd
+     * @param cmd 执行命令
+     * @param clientPwd 连接密码
+     * @param  clientOs 客户端操作系统
      * @return
      * @throws RemoteException
      */
-    String execCmd(String cmd) throws RemoteException;
+    String execCmd(String cmd, String clientPwd, String clientOs) throws RemoteException;
 }

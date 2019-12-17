@@ -6,5 +6,13 @@
 
     <groupId>com.r4v3zn</groupId>
     <artifactId>shell-plus</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
