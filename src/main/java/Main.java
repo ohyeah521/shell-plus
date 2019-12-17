@@ -36,7 +36,7 @@ public class Main {
             String clientName = getRandomString(16);
             Server rmiServer = new ServerImpl(pwd);
             registry.bind(clientName, rmiServer);
-            System.out.println("Run server ok, server host --> "+ip+":"+port+ "name --> "+clientName);
+            System.out.println("Run server ok, server host --> "+ip+":"+port+ " name --> "+clientName);
         } catch (RemoteException e) {
             e.printStackTrace();
         }catch (AlreadyBoundException e) {
