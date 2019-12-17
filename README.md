@@ -45,7 +45,7 @@ java -cp shell-plus-1.0.jar Main 3333 127.0.0.1 123456
 ```
 java -cp shell-plus-1.0.jar Client <port> <ip> <name> [pwd]
 ```
-![](img/2.png)
+![](img/3.png)
 ```
 java -cp shell-plus-1.0.jar Main 3333 127.0.0.1 3I3IF5liOOrw731Y 123456
 ```
