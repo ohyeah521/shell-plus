@@ -2,11 +2,11 @@
 
 Shell Plus 是基于 RMI 的一款服务器管工具，由服务端、注册中心、客户端进行组成。
 
-## 免责声明
+### 免责声明
 
-该工具用于服务器管理以及技术研究，禁止用于非法犯罪。
+该工具用于服务器管理、攻防后门安全测试以及技术研究，禁止用于非法犯罪。
 
-## 原理
+### 原理
 
 RMI（Remote Method Invocation）远程方法调用。能够让在客户端Java虚拟机上的对象像调用本地对象一样调用服务端java 虚拟机中的对象上的方法。
 
@@ -29,7 +29,19 @@ RMI远方法程调用步骤：
 
 通过编写服务器管理代码，代码进行注册到服务中，然后由客户端进行调用该服务端代码执行操作。
 
-## 用法
+### 用法
+
+开源地址：<https://github.com/0nise/shell-plus>
+
+自行编译：
+
+```
+git clone https://github.com/0nise/shell-plus
+cd shell-plus
+mvn clean package -DskipTests
+```
+
+发行版本：https://github.com/0nise/shell-plus/releases
 
 开启服务端：
 ```
@@ -51,3 +63,9 @@ java -cp shell-plus-1.0.jar Main 3333 127.0.0.1 3I3IF5liOOrw731Y 123456
 ```
 
 其中 `pwd` 参数可以不填默认为空，但不推荐。
+
+### 参考
+
+- [Java 中 RMI、JNDI、LDAP、JRMP、JMX、JMS那些事儿（上）](https://paper.seebug.org/1091/#rmi)
+- https://github.com/0nise/shell-plus
+- [浅谈RMI](https://blog.csdn.net/wubinghai/article/details/82951769)
