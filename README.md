@@ -67,5 +67,11 @@ java -cp shell-plus-1.0.jar Main 3333 127.0.0.1 3I3IF5liOOrw731Y 123456
 ### 参考
 
 - [Java 中 RMI、JNDI、LDAP、JRMP、JMX、JMS那些事儿（上）](https://paper.seebug.org/1091/#rmi)
-- https://github.com/0nise/shell-plus
+- [shell-plus](https://github.com/0nise/shell-plus)
 - [浅谈RMI](https://blog.csdn.net/wubinghai/article/details/82951769)
+
+### 更新日志
+
+- 2020-03-21
+
+    修复部分命令无法执行 BUG

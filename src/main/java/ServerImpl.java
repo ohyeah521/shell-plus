@@ -43,17 +43,20 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         BufferedReader bufrError = null;
         String os = System.getProperty("os.name");
         os = os.toLowerCase();
+        String[] executeCmd = null;
         if(os.contains("win")){
             if(cmd.contains("ping") && !cmd.contains("-n")){
                 cmd += " -n 4";
             }
+            executeCmd = new String[]{"cmd", "/c", cmd};
         }else{
             if(cmd.contains("ping") && !cmd.contains("-n")){
                 cmd += " -t 4";
             }
+            executeCmd = new String[]{"/bin/bash", "-c", cmd};
         }
         try {
-            process = Runtime.getRuntime().exec(cmd);
+            process = Runtime.getRuntime().exec(executeCmd);
             process.waitFor();
             if(clientOs != null){
                 clientOs = clientOs.toLowerCase();
