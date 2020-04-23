@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "0nise",
+      "name": "r4v3zn",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/18393907?v=4",
+      "profile": "http://www.r4v3zn.com",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "shell-plus",
+  "projectOwner": "0nise",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
