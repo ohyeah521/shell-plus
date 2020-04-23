@@ -88,7 +88,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://www.r4v3zn.com"><img src="https://avatars2.githubusercontent.com/u/18393907?v=4" width="100px;" alt=""/><br /><sub><b>r4v3zn</b></sub></a><br /><a href="#design-0nise" title="Design">🎨</a></td>
+    <td align="center"><a href="http://www.r4v3zn.com"><img src="https://avatars2.githubusercontent.com/u/18393907?v=4" width="100px;" alt=""/><br /><sub><b>r4v3zn</b></sub></a><br /><a href="#design-0nise" title="Design">🎨</a> <a href="https://github.com/0nise/shell-plus/issues?q=author%3A0nise" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
